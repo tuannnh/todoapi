@@ -1,0 +1,34 @@
+
+version: '2'
+services:
+  todoapi:
+    image: tuannnh/todoapi:0.0.1
+    container_name: todoapi
+    depends_on:
+      - mysqldb
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/SaverDB?useUnicode=true&characterEncoding=utf8&useSSL=false
+    ports:
+      - 8080:8080
+
+  mysqldb:
+    image: tuannnh/mysql:ver2
+    container_name: mysqldb
+    volumes:
+      - /Users/tuannnh/mysql/:/var/lib/mysql/
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+     image: tuannnh/phpmyadmin:ver2
+     container_name: pma
+     links:
+       - mysqldb
+     environment:
+       PMA_HOST: mysqldb
+       PMA_PORT: 3306
+       PMA_ARBITRARY: 1
+     restart: always
+     ports:
+       - 8081:80
+
