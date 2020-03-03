@@ -13,6 +13,6 @@ WORKDIR /app
 
 COPY --from=MAVEN_BUILD /build/target/todoapi.jar /app/app.jar
 
-EXPOSE 8080
+EXPOSE 9000
 
 ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
