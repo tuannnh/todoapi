@@ -6,3 +6,8 @@ services:
 branches:
   only:
     - /^dev.*$/
+
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - docker build -t tuannnh/todoapi .
+  - docker push tuannnh/todoapi
